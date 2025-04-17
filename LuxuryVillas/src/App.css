@@ -8,43 +8,66 @@
   margin: 0;
   padding: 0;
   font-family: "quicksand", sans-serif;
+  background-color: #faf6ee;
+  color: #585A5B;
+  font-weight: 500;
 }
 
 /*STILE NAVBAR*/
 .navbar {
-  z-index: 1;
+  position: sticky;
+  z-index: 1000;
   padding: 3px;
-  background-color: rgb(56, 54, 52);;
+  transition: background-color 0.3s ease;
+  top: 0;
 
 }
+
+.navbar-transparent {
+  background-color: transparent !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.bg-dark {
+  background-color: rgb(56, 54, 52) !important;
+}
+
 .navbar-toggler-icon {
   color: #dbb666;
 }
 .nav-link {
   color: #dbb666;
 }
-
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:active {
   color: #f7dca3;
 }
+
 
 /*STILE HOMEPAGE*/
 .BVtitle {
   font-family: "Bilbo Swash Caps", cursive;
-  font-size: 6.3em;
-  color: #f7dca3;
+  font-size: 6.5em;
+  color: #dbb666;
   text-align: center;
-  margin-top: 25vh;
-  letter-spacing: 2px;
-  font-weight: 500;
+  margin-top: 18vh;
+  letter-spacing: 2.7px;
+}
+.lead {
+  font-size: 1.5em;
+  padding-top: 0;
+  letter-spacing: 1.2px;
 }
 .homeH5 {
   font-family: "Bilbo Swash Caps", cursive;
-  font-size: 2em;
+  font-size: 2.1em;
   color: #dbb666;
   margin-top: 10px;
-  letter-spacing: 2px;
-  font-weight: 500;
+  letter-spacing: 2.2px;
+  font-weight: 600;
 }
 .hero-section {
   position: relative;
@@ -53,12 +76,13 @@
   background-position: center;
   background-repeat: no-repeat;
   height: 100vh;
+  padding-top: 70px;
 }
 .hero-section::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
   height: 100vh;
   z-index: 0;
 }
@@ -66,9 +90,26 @@
   position: relative;
   z-index: 1;
 }
-.second-row {
-  background-color: rgb(56, 54, 52);
+.second-row, .third-row {
+  border-bottom: 2px #dbb666 solid;
 }
+
+.scopriTitle {
+  font-size: 3em;
+  color: #887d64;
+  margin-top: 7vh;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+.evidenzaVille {
+  font-size: 3em;
+  color: #887d64;
+  margin-top: 0;
+  margin-bottom: 7vh;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
 /*STILE DETAILS PAGE*/
 .modalImg{
   width: 95%;
@@ -76,4 +117,15 @@
   border-radius: 8px;
 }
 
-
+/*STILE CHI SIAMO PAGE*/
+.AboutUs {
+  font-weight: 500;
+}
+.aboutUsTitle {
+  font-family: "Bilbo Swash Caps", cursive;
+  font-size: 3.5em;
+  color: #dbb666;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  letter-spacing: 4px;
+}

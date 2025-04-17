@@ -1,15 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { Nav } from 'react-bootstrap';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-
 function NavbarComponent() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
-    // Inizializza i componenti bootstrap quando il componente viene montato
-    // Non è necessario require qui perché importiamo già Bootstrap all'inizio
+    // Bootstrap init
   }, []);
 
   const handleLoginClick = (e) => {
@@ -18,13 +19,11 @@ function NavbarComponent() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg shadow-sm">
+    <nav className={`navbar navbar-expand-lg ${isHome ? 'navbar-transparent' : 'bg-dark'}`}>
       <div className="container-fluid">
-
-      <Link className="navbar-brand d-flex align-items-center ms-3" to="/">
-         <img src={"logo.png"} alt="Logo" style={{ height: '12vh' }} />
-      </Link>
-
+        <Link className="navbar-brand d-flex align-items-center ms-3" to="/">
+          <img src="logo.png" alt="Logo" style={{ height: '12vh' }} />
+        </Link>
 
         <button
           className="navbar-toggler"
@@ -47,19 +46,16 @@ function NavbarComponent() {
               <Link className="nav-link" to="/ville">Ville</Link>
             </li>
             <li className="nav-item">
-              <Link to="/chi-siamo" className="nav-link">Chi Siamo</Link>
+              <Link className="nav-link" to="/chi-siamo">Chi Siamo</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link " to="/blog">Blog</Link>
+              <Link className="nav-link" to="/blog">Blog</Link>
             </li>
             <li className="nav-item">
-            <Nav.Link as={Link} to="/login" className="">
-  Login
-</Nav.Link>
-
+              <Nav.Link as={Link} to="/login">Login</Nav.Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/prenotazioni">Le mie prenotazioni</Link>
+              <Link className="nav-link" to="/prenotazioni">Prenotazioni</Link>
             </li>
           </ul>
         </div>

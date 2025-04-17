@@ -14,6 +14,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css'
 import FooterComponent from './components/FooterComponent';
 import AboutUsComp from './components/AboutUsComponent';
+import PrenotazioniComp from './components/PrenotazioniComp';
+import AddPrenotazioneComp from './components/AddPrenotazioneComp';
 
 
 function App() {
@@ -32,6 +34,8 @@ function App() {
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/modifica-villa/:id" element={<EditVillaComp />} />
         <Route path="/chi-siamo" element={<AboutUsComp />} />
+        <Route path="/prenotazioni" element={<PrenotazioniComp />} />
+        <Route path="/prenota/:idVilla" element={<AddPrenotazioneComp />} />
 
       </Routes>
       <FooterComponent /> 
