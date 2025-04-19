@@ -26,7 +26,7 @@ const LogoutComp = () => {
 
   return (
     <>
-      <Button variant="outline-danger" onClick={handleLogout}>
+      <Button className="btnVedi" variant="transparent" onClick={handleLogout}>
         Logout
       </Button>
 

@@ -140,7 +140,7 @@ const HomeComponent = () => {
           </Col>
         ))}
         <Col xs={12} className="mt-4 text-center">
-          <Link to="/Ville" className="btnVedi btn btn-outline-dark">
+          <Link to="/Ville" className="btnVedi btn">
             Vedi tutte le ville
           </Link>
         </Col>

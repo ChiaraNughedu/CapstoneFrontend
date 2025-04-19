@@ -32,7 +32,7 @@
 }
 
 .bg-dark {
-  background-color: rgb(56, 54, 52) !important;
+  background-color: #3b3525 !important;
 }
 
 .navbar-toggler-icon {
@@ -96,18 +96,34 @@
 
 .scopriTitle {
   font-size: 3em;
-  color: #887d64;
+  color: #796e57;
   margin-top: 7vh;
   letter-spacing: 3px;
   font-weight: 600;
 }
 .evidenzaVille {
   font-size: 3em;
-  color: #887d64;
+  color: #796e57;
   margin-top: 0;
   margin-bottom: 7vh;
   letter-spacing: 3px;
   font-weight: 600;
+}
+
+.btnVedi {
+  color: #796e57;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 8px 20px;
+  border: 1px solid #8f8162;
+  border-radius: 5px;
+}
+
+.btnVedi:hover {
+  background-color: #dbb666;
+  color: #faf6ee;
+  transition: all 0.3s ease;
 }
 
 /*STILE DETAILS PAGE*/
@@ -128,4 +144,69 @@
   margin-top: 10px;
   margin-bottom: 10px;
   letter-spacing: 4px;
+}
+/*PAGINA VILLE*/
+.btnVediSelect {
+  background-color: #faf6ee;
+  color: #796e57;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 8px 20px;
+  border: 1px solid #796e57;
+  border-radius: 5px;
+}
+
+.btnVediSelect:hover {
+  background-color: #faf6ee;
+  color: #796e57;
+  transition: all 0.3s ease;
+}
+.btnVediSelect:focus {
+  box-shadow: none;
+}
+/*LOGIN*/ 
+.loginContainer {
+  height: 100%;
+}
+.loginBox {
+  border: 2px solid #bead86;
+  border-radius: 10px;
+}
+.loginTitle {
+  font-family: "Bilbo Swash Caps", cursive;
+  font-size: 2.9em;
+  color: #dbb666;
+  margin-top: 15px;
+  letter-spacing: 3.5px;
+  font-weight: 600;
+}
+.loginAlert {
+  background-color: #f3cd7b;
+  color: #796e57;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+.loginLink {
+  color: #796e57;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 8px 20px;
+}
+.loginLink:hover {
+  color: #be994d;
+  transition: all 0.3s ease;
+}
+.formLabel {
+  letter-spacing: 0.4px;
+  font-size: 0.9em;
+  color: #796e57;
+  padding-bottom: 0;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+.formLogin:focus {
+  box-shadow: none;
+  border-color: #c4ad7d;
 }

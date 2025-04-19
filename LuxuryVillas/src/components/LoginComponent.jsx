@@ -79,10 +79,10 @@ const LoginComponent = () => {
   };
 
   return (
-    <Container className="py-5">
+    <Container className="loginContainer py-5">
       <Row className="justify-content-center">
-        <Col md={6}>
-          <h2 className="text-center mb-4">
+        <Col md={6} className="loginBox text-center pb-4">
+          <h2 className="loginTitle text-center mb-4">
             {isLogin ? "Login" : "Registrazione"}
           </h2>
 
@@ -91,9 +91,10 @@ const LoginComponent = () => {
           <Form onSubmit={handleSubmit}>
             {!isLogin && (
               <>
-                <Form.Group className="mb-3">
-                  <Form.Label>Nome</Form.Label>
+                <Form.Group className="mb-3 mx-auto w-75">
+                  <Form.Label className="formLabel">Nome</Form.Label>
                   <Form.Control
+                  className="formLogin"
                     type="text"
                     name="nome"
                     value={formData.nome}
@@ -102,9 +103,10 @@ const LoginComponent = () => {
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Cognome</Form.Label>
+                <Form.Group className="mb-3 mx-auto w-75">
+                  <Form.Label className="formLabel">Cognome</Form.Label>
                   <Form.Control
+                   className="formLogin"
                     type="text"
                     name="cognome"
                     value={formData.cognome}
@@ -113,9 +115,10 @@ const LoginComponent = () => {
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Email</Form.Label>
+                <Form.Group className="mb-3 mx-auto w-75">
+                  <Form.Label className="formLabel">Email</Form.Label>
                   <Form.Control
+                   className="formLogin"
                     type="email"
                     name="email"
                     value={formData.email}
@@ -126,9 +129,10 @@ const LoginComponent = () => {
               </>
             )}
 
-            <Form.Group className="mb-3">
-              <Form.Label>Username</Form.Label>
+            <Form.Group className="mb-3 mx-auto w-75">
+              <Form.Label className="formLabel">Username</Form.Label>
               <Form.Control
+               className="formLogin"
                 type="text"
                 name="username"
                 value={formData.username}
@@ -137,9 +141,10 @@ const LoginComponent = () => {
               />
             </Form.Group>
 
-            <Form.Group className="mb-4">
-              <Form.Label>Password</Form.Label>
+            <Form.Group className="mb-4 mx-auto w-75">
+              <Form.Label className="formLabel">Password</Form.Label>
               <Form.Control
+               className="formLogin"
                 type="password"
                 name="password"
                 value={formData.password}
@@ -148,13 +153,13 @@ const LoginComponent = () => {
               />
             </Form.Group>
 
-            <Button type="submit" className="w-100">
+            <Button variant="transparent" type="submit" className="w-75 btnVedi">
               {isLogin ? "Accedi" : "Registrati"}
             </Button>
           </Form>
 
           <div className="text-center mt-3">
-            <Button variant="link" onClick={() => setIsLogin(!isLogin)}>
+            <Button className="loginLink" variant="link" onClick={() => setIsLogin(!isLogin)}>
               {isLogin
                 ? "Non hai un account? Registrati"
                 : "Hai già un account? Accedi"}
@@ -162,11 +167,11 @@ const LoginComponent = () => {
           </div>
 
           {token && (
-            <div className="text-center mt-4">
-              <Alert variant="success">
+            <div className="text-center">
+              <Alert className="loginAlert py-3 mx-auto w-75 border-0">
                 Login effettuato come: <strong>{username}</strong>
               </Alert>
-              <Button variant="danger" onClick={handleLogout}>
+              <Button variant="transparent" className="btnVedi" onClick={handleLogout}>
                 Logout
               </Button>
             </div>

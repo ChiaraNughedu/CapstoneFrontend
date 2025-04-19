@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import VillaCardComponent from "../components/VillaCardComponent";
 
 const VilleComponent = () => {
   const [ville, setVille] = useState([]);
+  const [categoriaFiltro, setCategoriaFiltro] = useState("Tutte");
 
   const token = useSelector((state) => state.auth.token);
   const ruolo = useSelector((state) => state.auth.ruolo);
+
   const isAdmin = ruolo === "Admin";
+  const navigate = useNavigate();
 
   const fetchVille = () => {
     fetch("https://localhost:7141/api/Ville", {
@@ -49,13 +54,51 @@ const VilleComponent = () => {
     }
   };
 
+  // Filtra per categoria selezionata
+  const villeFiltrate =
+    categoriaFiltro === "Tutte"
+      ? ville
+      : ville.filter((villa) => villa.nomeCategoria === categoriaFiltro);
+
   return (
-    <Container className="py-5">
-      <h2 className="mb-4 text-center">
-        {isAdmin ? "Gestione Ville" : "Le Nostre Ville"}
-      </h2>
+    <Container className="pb-5">
       <Row>
-        {ville.map((villa) => (
+        <Col className="text-center py-2">
+        <h2 className=" text-uppercase scopriTitle">{isAdmin ? "Gestione Ville" : "Le Nostre Ville"}</h2>
+        </Col>
+      </Row>
+
+    <Row className="d-flex justify-content-between align-items-center mt-4 mb-5">
+       <Col md={9}>
+        <Button className="btnVedi" variant="transparent"
+           onClick={() => {
+             navigate(-1);
+             window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+        >Torna Indietro
+        </Button>
+       </Col>
+
+       <Col md={3}>
+        <Form.Group controlId="filtroCategoria" className=""> 
+           <Form.Select
+               className="btnVediSelect"
+               value={categoriaFiltro}
+              onChange={(e) => setCategoriaFiltro(e.target.value)}
+            >
+              <option value="Tutte">Tutte le Categorie</option>
+              <option value="Villa">Villa</option>
+              <option value="Appartamento">Appartamento</option>
+           </Form.Select>
+        </Form.Group>
+      </Col>
+    </Row>
+      
+
+    
+
+      <Row>
+        {villeFiltrate.map((villa) => (
           <Col key={villa.id} md={4} className="mb-4">
             <VillaCardComponent
               id={villa.id}
