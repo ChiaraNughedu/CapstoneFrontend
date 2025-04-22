@@ -42,7 +42,9 @@
   color: #dbb666;
 }
 .nav-link:hover,
-.nav-link:active {
+.nav-link:active,
+.nav-linki:focus,
+.nav-link:visited {
   color: #f7dca3;
 }
 
@@ -55,9 +57,11 @@
   text-align: center;
   margin-top: 18vh;
   letter-spacing: 2.7px;
+  
 }
 .lead {
   font-size: 1.5em;
+  color: #faf6ee;
   padding-top: 0;
   letter-spacing: 1.2px;
 }
@@ -145,6 +149,9 @@
   margin-bottom: 10px;
   letter-spacing: 4px;
 }
+.separateHr {
+  border: 1px solid #dbb666;
+}
 /*PAGINA VILLE*/
 .btnVediSelect {
   background-color: #faf6ee;
@@ -156,21 +163,43 @@
   border: 1px solid #796e57;
   border-radius: 5px;
 }
-
 .btnVediSelect:hover {
-  background-color: #faf6ee;
-  color: #796e57;
+  background-color: #dbb666;
+  color: #faf6ee;
+  border: none;
   transition: all 0.3s ease;
 }
-.btnVediSelect:focus {
-  box-shadow: none;
+.dropdown-menu {
+  background-color: #faf6ee;
+  border-radius: 5px;
+  border: 1px solid #dee2e6;
+  padding: 0;
 }
+.dropdown-item {
+  padding: 5px 25px 5px 20px;
+}
+.dropdown-item:hover {
+  background-color: #dbb666;
+  color: #faf6ee;
+}
+.btnVediSelect:focus,
+.btnVediSelect:active,
+.show > .btnVediSelect {
+  background-color: #dbb666; 
+  color: #faf6ee; 
+  box-shadow: none;
+  border: none; 
+}
+.bordinoGold {
+  border-right: 1px solid #aa9567;
+}
+
 /*LOGIN*/ 
 .loginContainer {
-  height: 100%;
+  height: 100vh;
 }
 .loginBox {
-  border: 2px solid #bead86;
+  border: 2px solid #dbb666;
   border-radius: 10px;
 }
 .loginTitle {
@@ -210,3 +239,115 @@
   box-shadow: none;
   border-color: #c4ad7d;
 }
+
+
+/*VILLA CARD*/
+.villaCard {
+  background-color: #faf6ee;
+  box-shadow: #b6a174 2px 7px 12px;
+}
+.villaCardName {
+  font-family: "Bilbo Swash Caps", cursive;
+  font-size: 1.7em;
+  color: #dbb666;
+  margin-top: 2px;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.villaPlace {
+  font-size: 0.9em;
+  color: #796e57;
+  margin-top: 4px;;
+  letter-spacing: 0.7px;
+}
+.btnVediCard {
+  color: #796e57;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 5px 14px;
+  border: 1px solid #8f8162;
+  border-radius: 5px;
+}
+
+.btnVediCard:hover {
+  background-color: #dbb666;
+  color: #faf6ee;
+  transition: all 0.3s ease;
+}
+
+/*DETAILS PAGE*/
+.detailsNameVilla {
+  font-family: "Bilbo Swash Caps", cursive;
+  font-size: 3.2em;
+  color: #dbb666;
+  margin-top: 3px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.villaDescrizione {
+  font-size: 0.9em;
+  color: #796e57;
+  margin-top: 4px;
+  letter-spacing: 0.5px;
+}
+.villaLocalita {
+  font-family: "Bilbo Swash Caps", cursive;
+  font-size: 1.5em;
+  color: #817a6c;
+
+  letter-spacing: 1.2px;
+  font-weight: 600;
+}
+.villaPrezzo {
+  font-size: 1.2em;
+  color: #817a6c;
+  letter-spacing: 1.2px;
+  font-weight: 600;
+}
+.prezzoText {
+  font-size: 0.6em;
+  color: #796e57;
+  letter-spacing: 0.5px;
+}
+
+/*PRENOTAZIONI*/
+.prenotazioniContainer {
+  height: 100%;
+}
+.effettuaContainer {
+  height: 100vh;
+
+}
+.editPrenotazioneContainer {
+  height: 100vh;
+}
+
+/*FOOTER*/
+.footer {
+  color: #796e57;
+  margin-top: 2vh;
+  padding-top: 5vh;
+  border-top: 1px solid #dbb666;
+}
+.footerH5 {
+  font-size: 1.1em;
+  margin-bottom: 3vh;
+  color: #796e57;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+}
+.footerLink a {
+  color: #796e57;
+  text-decoration: none;
+}
+.footerLink a:hover {
+  color: #796e57;
+  text-decoration: underline;
+}
+.footerIcon {
+  color: #796e57;
+  font-size: 1.5em;
+  margin-right: 10px;
+} 

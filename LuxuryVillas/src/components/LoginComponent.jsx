@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, clearUser } from "../redux/reducers/authReducer";
 
+
 const LoginComponent = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
@@ -79,94 +80,16 @@ const LoginComponent = () => {
   };
 
   return (
-    <Container className="loginContainer py-5">
+    <Container fluid className="loginContainer py-5">
       <Row className="justify-content-center">
-        <Col md={6} className="loginBox text-center pb-4">
+        <Col md={6} className="loginBox text-center mb-4 pb-4">
           <h2 className="loginTitle text-center mb-4">
             {isLogin ? "Login" : "Registrazione"}
           </h2>
 
           {error && <Alert variant="danger">{error}</Alert>}
 
-          <Form onSubmit={handleSubmit}>
-            {!isLogin && (
-              <>
-                <Form.Group className="mb-3 mx-auto w-75">
-                  <Form.Label className="formLabel">Nome</Form.Label>
-                  <Form.Control
-                  className="formLogin"
-                    type="text"
-                    name="nome"
-                    value={formData.nome}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3 mx-auto w-75">
-                  <Form.Label className="formLabel">Cognome</Form.Label>
-                  <Form.Control
-                   className="formLogin"
-                    type="text"
-                    name="cognome"
-                    value={formData.cognome}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3 mx-auto w-75">
-                  <Form.Label className="formLabel">Email</Form.Label>
-                  <Form.Control
-                   className="formLogin"
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </Form.Group>
-              </>
-            )}
-
-            <Form.Group className="mb-3 mx-auto w-75">
-              <Form.Label className="formLabel">Username</Form.Label>
-              <Form.Control
-               className="formLogin"
-                type="text"
-                name="username"
-                value={formData.username}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-4 mx-auto w-75">
-              <Form.Label className="formLabel">Password</Form.Label>
-              <Form.Control
-               className="formLogin"
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-
-            <Button variant="transparent" type="submit" className="w-75 btnVedi">
-              {isLogin ? "Accedi" : "Registrati"}
-            </Button>
-          </Form>
-
-          <div className="text-center mt-3">
-            <Button className="loginLink" variant="link" onClick={() => setIsLogin(!isLogin)}>
-              {isLogin
-                ? "Non hai un account? Registrati"
-                : "Hai già un account? Accedi"}
-            </Button>
-          </div>
-
-          {token && (
+          {token ? (
             <div className="text-center">
               <Alert className="loginAlert py-3 mx-auto w-75 border-0">
                 Login effettuato come: <strong>{username}</strong>
@@ -175,9 +98,94 @@ const LoginComponent = () => {
                 Logout
               </Button>
             </div>
+          ) : (
+            <>
+              <Form onSubmit={handleSubmit}>
+                {!isLogin && (
+                  <>
+                    <Form.Group className="mb-3 mx-auto w-75">
+                      <Form.Label className="formLabel">Nome</Form.Label>
+                      <Form.Control
+                        className="formLogin"
+                        type="text"
+                        name="nome"
+                        value={formData.nome}
+                        onChange={handleChange}
+                        required
+                      />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 mx-auto w-75">
+                      <Form.Label className="formLabel">Cognome</Form.Label>
+                      <Form.Control
+                        className="formLogin"
+                        type="text"
+                        name="cognome"
+                        value={formData.cognome}
+                        onChange={handleChange}
+                        required
+                      />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3 mx-auto w-75">
+                      <Form.Label className="formLabel">Email</Form.Label>
+                      <Form.Control
+                        className="formLogin"
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                      />
+                    </Form.Group>
+                  </>
+                )}
+
+                <Form.Group className="mb-3 mx-auto w-75">
+                  <Form.Label className="formLabel">Username</Form.Label>
+                  <Form.Control
+                    className="formLogin"
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-4 mx-auto w-75">
+                  <Form.Label className="formLabel">Password</Form.Label>
+                  <Form.Control
+                    className="formLogin"
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+
+                <Button variant="transparent" type="submit" className="w-75 btnVedi">
+                  {isLogin ? "Accedi" : "Registrati"}
+                </Button>
+              </Form>
+
+              <div className="text-center mt-3">
+                <Button
+                  className="loginLink"
+                  variant="link"
+                  onClick={() => setIsLogin(!isLogin)}
+                >
+                  {isLogin
+                    ? "Non hai un account? Registrati"
+                    : "Hai già un account? Accedi"}
+                </Button>
+              </div>
+            </>
           )}
         </Col>
       </Row>
+   
     </Container>
   );
 };

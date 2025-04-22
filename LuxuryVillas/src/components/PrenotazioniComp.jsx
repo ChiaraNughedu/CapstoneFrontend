@@ -5,7 +5,7 @@ import {
   deletePrenotazione,
 } from '../redux/reducers/prenotazioniSlice';
 import { useNavigate } from 'react-router-dom';
-
+import { Container, Row, Col, Button, Alert } from 'react-bootstrap';
 const PrenotazioniComp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,68 +36,73 @@ const PrenotazioniComp = () => {
 
   if (!token) {
     return (
-      <div className="p-6">
-        <h2 className="text-xl font-bold mb-2">Accesso richiesto</h2>
+      <Container className="effettuaContainer py-5">
+        <h2>Accesso richiesto</h2>
         <p>Non hai effettuato il login.</p>
-      </div>
+      </Container>
     );
   }
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Le tue prenotazioni</h2>
+    <Container className="prenotazioniContainer px-0 py-3">
+      <h2 className="homeH5 pb-3">
+        {ruolo === 'Admin' ? 'Tutte le prenotazioni' : 'Le tue prenotazioni'}
+      </h2>
+
 
       {loading && <p>Caricamento...</p>}
-      {error && <p className="text-red-500">Errore: {error}</p>}
-
+      {error && <Alert variant="danger">Errore: {error}</Alert>}
       {lista.length === 0 && !loading && <p>Nessuna prenotazione trovata.</p>}
 
       {isDeleted && (
-        <p className="text-green-600 font-semibold mb-4">
+        <Alert variant="success">
           Prenotazione eliminata con successo!
-        </p>
+        </Alert>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <Row className="g-4">
         {lista.map((p) => (
-          <div
-            key={p.id}
-            className="border rounded-xl shadow p-4 bg-white flex flex-col gap-2"
-          >
-            <h3 className="text-xl font-semibold">{p.nomeVilla}</h3>
-            <p>
-              <strong>Dal:</strong>{' '}
-              {new Date(p.dataInizio).toLocaleDateString()} <strong>al:</strong>{' '}
-              {new Date(p.dataFine).toLocaleDateString()}
-            </p>
-            <p>
-              <strong>Prezzo:</strong> € {p.prezzoTotale.toLocaleString()}
-            </p>
+          <Col key={p.id} xs={12} md={6}>
+            <div className="border rounded p-3 bg-transparent h-100 d-flex flex-column justify-content-between">
+              <div>
+                <h4 className="villaCardName mb-2">{p.nomeVilla}</h4>
+                <p>
+                  <strong>Dal:</strong>{' '}
+                  {new Date(p.dataInizio).toLocaleDateString()} <br /> <strong>al:</strong>{' '}
+                  {new Date(p.dataFine).toLocaleDateString()}
+                </p>
+                <p>
+                  <strong>Prezzo:</strong> € {p.prezzoTotale.toLocaleString()}
+                </p>
 
-            {ruolo === 'Admin' && (
-              <p>
-                <strong>Utente:</strong> {p.nome} {p.cognome} ({p.userEmail})
-              </p>
-            )}
+                {ruolo === 'Admin' && (
+                  <p>
+                    <strong>Utente:</strong> {p.nome} {p.cognome} ({p.userEmail})
+                  </p>
+                )}
+              </div>
 
-            <div className="flex gap-2 mt-2">
-              <button
-                onClick={() => handleEdit(p.id)}
-                className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded"
-              >
-                Modifica
-              </button>
-              <button
-                onClick={() => handleDelete(p.id)}
-                className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
-              >
-                Elimina
-              </button>
+              <div className="d-flex gap-2 mt-3">
+                <Button
+                  variant="transparent"
+                  className="btnVedi"
+                  onClick={() => handleEdit(p.id)}
+                >
+                  Modifica
+                </Button>
+                <Button
+                  variant="transparent"
+                  className="btnVedi"
+                  onClick={() => handleDelete(p.id)}
+                >
+                  Elimina
+                </Button>
+              </div>
             </div>
-          </div>
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Dropdown, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -26,6 +26,7 @@ const VilleComponent = () => {
 
   useEffect(() => {
     fetchVille();
+    window.scrollTo(0, 0);
   }, []);
 
   const handleEdit = (id) => {
@@ -54,7 +55,7 @@ const VilleComponent = () => {
     }
   };
 
-  // Filtra per categoria selezionata
+  
   const villeFiltrate =
     categoriaFiltro === "Tutte"
       ? ville
@@ -64,7 +65,7 @@ const VilleComponent = () => {
     <Container className="pb-5">
       <Row>
         <Col className="text-center py-2">
-        <h2 className=" text-uppercase scopriTitle">{isAdmin ? "Gestione Ville" : "Le Nostre Ville"}</h2>
+        <h2 className="text-uppercase scopriTitle">{isAdmin ? "Gestione Ville" : "Le Nostre Ville"}</h2>
         </Col>
       </Row>
 
@@ -79,38 +80,62 @@ const VilleComponent = () => {
         </Button>
        </Col>
 
-       <Col md={3}>
-        <Form.Group controlId="filtroCategoria" className=""> 
-           <Form.Select
-               className="btnVediSelect"
-               value={categoriaFiltro}
-              onChange={(e) => setCategoriaFiltro(e.target.value)}
-            >
-              <option value="Tutte">Tutte le Categorie</option>
-              <option value="Villa">Villa</option>
-              <option value="Appartamento">Appartamento</option>
-           </Form.Select>
-        </Form.Group>
-      </Col>
+       <Col md={3} className="text-end">
+  <Dropdown>
+    <Dropdown.Toggle variant="secondary" className="btnVediSelect">
+      {categoriaFiltro === "Tutte" ? "Tutte le Categorie" : categoriaFiltro}
+    </Dropdown.Toggle>
+
+    <Dropdown.Menu>
+      <Dropdown.Item onClick={() => setCategoriaFiltro("Tutte")}>Tutte le Categorie</Dropdown.Item>
+      <Dropdown.Item onClick={() => setCategoriaFiltro("Villa")}>Villa</Dropdown.Item>
+      <Dropdown.Item onClick={() => setCategoriaFiltro("Appartamento")}>Appartamento</Dropdown.Item>
+    </Dropdown.Menu>
+  </Dropdown>
+</Col>
+
     </Row>
       
 
     
 
-      <Row>
-        {villeFiltrate.map((villa) => (
-          <Col key={villa.id} md={4} className="mb-4">
-            <VillaCardComponent
-              id={villa.id}
-              nomeVilla={villa.nomeVilla}
-              imgCopertina={villa.imgCopertina}
-              localita={villa.localita}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          </Col>
-        ))}
-      </Row>
+    <Row className="mt-4">
+  {/* Colonna sinistra con testo */}
+  <Col md={3}>
+  <div className="bordinoGold h-100 pe-3" style={{ height: "100%", minHeight: "100%" }}>
+    <p className="villaPlace"><strong>Scopri le nostre ville e appartamenti esclusivi.</strong></p>
+      <p className="villaPlace">
+        Boutique Villas seleziona le migliori proprietà della Costa Smeralda per offrirti il miglior soggiorno di lusso. 
+        Ogni struttura è stata scelta con cura per garantire un'esperienza unica e indimenticabile.
+        <br />
+        Le nostre ville sono dotate di tutti i comfort e servizi per rendere il tuo soggiorno perfetto.
+        Ogni villa è unica e offre un'atmosfera esclusiva, con arredi eleganti e moderni. Tutte le proprietà sono circondate da ampi spazi esterni, piscine private e giardini curati.
+        I nostri servizi includono concierge, chef privati e personale dedicato per soddisfare ogni tua esigenza.
+
+      </p>
+    </div>
+  </Col>
+
+ 
+  {/* Colonna destra con le ville */}
+  <Col md={9}>
+    <Row className=" justify-content-between">
+      {villeFiltrate.map((villa) => (
+        <Col key={villa.id} md={6} className="mb-4">
+          <VillaCardComponent
+            id={villa.id}
+            nomeVilla={villa.nomeVilla}
+            imgCopertina={villa.imgCopertina}
+            localita={villa.localita}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
+        </Col>
+      ))}
+    </Row>
+  </Col>
+</Row>
+
     </Container>
   );
 };

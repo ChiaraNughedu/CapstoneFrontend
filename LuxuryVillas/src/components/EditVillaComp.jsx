@@ -48,12 +48,12 @@ const EditVillaComp = () => {
 
   return (
     <Container className="py-5">
-      <h2 className="text-center mb-4">Modifica Villa</h2>
+      <h2 className="homeH5 text-center mb-4">Modifica Villa</h2>
       {error && <Alert variant="danger">{error}</Alert>}
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label>Nome della Villa</Form.Label>
+          <Form.Label><strong>Nome della Villa</strong></Form.Label>
           <Form.Control
             type="text"
             name="nomeVilla"
@@ -64,7 +64,7 @@ const EditVillaComp = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Località</Form.Label>
+          <Form.Label><strong>Località</strong></Form.Label>
           <Form.Control
             type="text"
             name="localita"
@@ -75,7 +75,7 @@ const EditVillaComp = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Prezzo</Form.Label>
+          <Form.Label><strong>Prezzo per notte</strong></Form.Label>
           <Form.Control
             type="text"
             name="prezzo"
@@ -86,7 +86,7 @@ const EditVillaComp = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Immagine di Copertina (URL)</Form.Label>
+          <Form.Label><strong>Immagine di Copertina (URL)</strong></Form.Label>
           <Form.Control
             type="text"
             name="imgCopertina"
@@ -97,8 +97,10 @@ const EditVillaComp = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label>Descrizione</Form.Label>
+          <Form.Label><strong>Descrizione</strong></Form.Label>
           <Form.Control
+          as="textarea"
+          rows={7} 
             type="text"
             name="descrizione"
             value={villa.descrizione}
@@ -107,9 +109,18 @@ const EditVillaComp = () => {
           />
         </Form.Group>
 
-        <Button type="submit" variant="primary">
-          Salva Modifiche
-        </Button>
+        <div className="d-flex justify-content-between mt-4">
+  <Button
+    variant="transparent" className="btnVedi"
+    onClick={() => navigate(-1)}
+  >
+    Annulla modifica
+  </Button>
+  <Button type="submit" variant="transparent" className="btnVedi">
+    Salva Modifiche
+  </Button>
+</div>
+
       </Form>
     </Container>
   );

@@ -12,10 +12,10 @@ import EditVillaComp from './components/EditVillaComp';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import './App.css'
-import FooterComponent from './components/FooterComponent';
 import AboutUsComp from './components/AboutUsComponent';
 import PrenotazioniComp from './components/PrenotazioniComp';
 import AddPrenotazioneComp from './components/AddPrenotazioneComp';
+import EditPrenotazioneComp from './components/EditPrenotazioneComp';
 
 
 function App() {
@@ -36,9 +36,10 @@ function App() {
         <Route path="/chi-siamo" element={<AboutUsComp />} />
         <Route path="/prenotazioni" element={<PrenotazioniComp />} />
         <Route path="/prenota/:idVilla" element={<AddPrenotazioneComp />} />
+        <Route path="/modifica-prenotazione/:idPrenotazione" element={<EditPrenotazioneComp />} />
+
 
       </Routes>
-      <FooterComponent /> 
     </BrowserRouter>
     
   )

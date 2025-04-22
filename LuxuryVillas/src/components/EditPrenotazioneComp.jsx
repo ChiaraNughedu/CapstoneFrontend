@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { updatePrenotazione } from '../redux/reducers/prenotazioniSlice';
 
 const EditPrenotazioneComp = () => {
@@ -27,46 +28,43 @@ const EditPrenotazioneComp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Logica per aggiornare la prenotazione
     dispatch(updatePrenotazione({ id, formData, token }));
     navigate('/prenotazioni');
   };
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Modifica Prenotazione</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="dataInizio" className="block text-lg font-medium">
-            Data di inizio
-          </label>
-          <input
-            type="date"
-            id="dataInizio"
-            value={formData.dataInizio}
-            onChange={(e) => setFormData({ ...formData, dataInizio: e.target.value })}
-            className="border rounded p-2 w-full"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="dataFine" className="block text-lg font-medium">
-            Data di fine
-          </label>
-          <input
-            type="date"
-            id="dataFine"
-            value={formData.dataFine}
-            onChange={(e) => setFormData({ ...formData, dataFine: e.target.value })}
-            className="border rounded p-2 w-full"
-            required
-          />
-        </div>
-        <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-          Salva Modifiche
-        </button>
-      </form>
-    </div>
+    <Container className="editPrenotazioneContainer mt-4">
+      <Row className="justify-content-center">
+        <Col md={6}>
+          <h2 className="homeH5 text-center py-3 mb-4">Modifica Prenotazione</h2>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="formDataInizio">
+              <Form.Label><strong>Data check-in</strong></Form.Label>
+              <Form.Control
+                type="date"
+                value={formData.dataInizio}
+                onChange={(e) => setFormData({ ...formData, dataInizio: e.target.value })}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formDataFine">
+              <Form.Label><strong>Data check-out</strong></Form.Label>
+              <Form.Control
+                type="date"
+                value={formData.dataFine}
+                onChange={(e) => setFormData({ ...formData, dataFine: e.target.value })}
+                required
+              />
+            </Form.Group>
+
+            <Button className="btnVedi mt-3" variant="transparent" type="submit">
+              Salva Modifiche
+            </Button>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

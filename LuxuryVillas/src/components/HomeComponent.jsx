@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Nav, Image } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import VillaCardComponent from "./VillaCardComponent";
 import LogoutComp from "./LogoutComp";
 import NavbarComponent from "./NavbarComponent";
+import FooterComponent from "./FooterComponent";
 
 const HomeComponent = () => {
   const [ville, setVille] = useState([]);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     fetch("https://localhost:7141/api/Ville") // 🔓 NESSUN token
@@ -22,8 +24,13 @@ const HomeComponent = () => {
       .catch((error) => {
         console.error("Errore nel recupero ville:", error);
       });
+      window.scrollTo(0, 0); // Scrolla in alto alla pagina
   }, []);
 
+  const handleVediVille = () => {
+    navigate("/Ville");  
+
+  };
   return (
     <Container fluid>
       <Row className="hero-section p-0 d-flex flex-column align-items-center text-center text-white"
@@ -131,21 +138,23 @@ const HomeComponent = () => {
       <Row className="py-5 mx-3 ">
         <h2 className="evidenzaVille text-center text-uppercase">In Evidenza</h2>
         {ville.map((villa) => (
-          <Col key={villa.Id} md={4} className="mb-4">
-            <VillaCardComponent
-              id={villa.Id}
+          <Col key={villa.id} md={4} className="mb-4">
+            <VillaCardComponent 
+              id={villa.id}
               nomeVilla={villa.nomeVilla}
               imgCopertina={villa.imgCopertina}
             />
           </Col>
         ))}
         <Col xs={12} className="mt-4 text-center">
-          <Link to="/Ville" className="btnVedi btn">
+        <button onClick={handleVediVille} className="btnVedi btn">
             Vedi tutte le ville
-          </Link>
+          </button>
         </Col>
       </Row>
+      <FooterComponent />
     </Container>
+     
   );
 };
 

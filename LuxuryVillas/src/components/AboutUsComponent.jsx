@@ -8,6 +8,7 @@ const AboutUsComp = () => {
       <Row className="justify-content-center">
         <Col md={10} lg={8} className="text-center">
           <h1 className="aboutUsTitle pt-0 pb-2">Chi Siamo</h1>
+          <hr className="separateHr mt-2 mb-4" />
           <p className=" my-1">
             Siamo specializzati nel proporre esperienze uniche in ville di lusso selezionate con cura.
             La nostra missione è offrire soggiorni esclusivi, comfort impareggiabile e un servizio su misura
@@ -27,14 +28,11 @@ const AboutUsComp = () => {
           <p className=" my-1">
             Da sempre scegliamo la Costa Smeralda come cuore pulsante della nostra attività, per le innumerevoli bellezze naturali, le spiagge incantevoli e il mare cristallino, ma anche per l'esclusività della sua vita notturna e dei suoi eventi mondani.
           </p>
+          <hr className="separateHr mt-4 mb-4" />
         </Col>
       </Row>
 
-      <Row className="text-center">
-        <Col>
-          <h2 className="aboutUsTitle py-4">Le Nostre Sedi</h2>
-        </Col>
-      </Row>
+      
 
       <Row className="justify-content-center">
         <Col md={4} className="text-center mb-4">

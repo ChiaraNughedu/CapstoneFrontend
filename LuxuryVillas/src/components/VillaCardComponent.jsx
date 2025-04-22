@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Card, Button, Toast, ToastContainer } from "react-bootstrap";
+import React from "react";
+import { Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -11,88 +11,48 @@ const VillaCardComponent = ({ id, nomeVilla, localita, imgCopertina, onDelete })
   const isAuthenticated = !!token;
   const isAdmin = ruolo === "Admin";
 
-  const [showToast, setShowToast] = useState(false);
-
-  const handlePrenotaClick = () => {
-    setShowToast(true);
-    setTimeout(() => {
-      navigate(`/prenota/${id}`);
-    }, 3500);
-  };
-
   return (
-    <>
-      <Card>
-        <Card.Img variant="top" src={imgCopertina} alt={`Immagine di ${nomeVilla}`} />
-        <Card.Body>
-          <Card.Title className="homeH5">{nomeVilla}</Card.Title>
-          <p>{localita}</p>
-
+    <Card className="villaCard">
+      <Card.Img variant="top" src={imgCopertina} alt={`Immagine di ${nomeVilla}`} />
+      <Card.Body className="d-flex flex-column">
+        <div className="d-flex justify-content-between align-items-center">
+          <div>
+            <Card.Title className="villaCardName">{nomeVilla}</Card.Title>
+            <p className="villaPlace mb-0">{localita}</p>
+          </div>
           <Button
-            variant="outline-primary"
+            variant="transparent"
             size="sm"
-            className="me-2"
+            className="btnVediCard my-auto"
             onClick={() => navigate(`/Ville/${id}`)}
           >
             Dettagli
           </Button>
+        </div>
+      
 
-          {isAuthenticated && !isAdmin && (
+        {isAdmin && (
+          <div className="mt-3 d-flex justify-content-between align-items-center">
             <Button
-              variant="outline-success"
+              variant="transparent"
               size="sm"
-              className="me-2"
-              onClick={handlePrenotaClick}
+              className="me-2 btnVediCard"
+              onClick={() => navigate(`/admin/modifica-villa/${id}`)}
             >
-              Prenota
+              Modifica
             </Button>
-          )}
-
-          {!isAuthenticated && (
-            <p className="text-muted small mt-2">Effettua il login per prenotare</p>
-          )}
-
-          {isAdmin && (
-            <>
-              <Button
-                variant="warning"
-                size="sm"
-                className="ms-2"
-                onClick={() => navigate(`/admin/modifica-villa/${id}`)}
-              >
-                Modifica
-              </Button>
-              <Button
-                variant="danger"
-                size="sm"
-                className="ms-2"
-                onClick={() => onDelete(id)}
-              >
-                Elimina
-              </Button>
-            </>
-          )}
-        </Card.Body>
-      </Card>
-
-      {/* Toast di conferma */}
-      <ToastContainer position="bottom-end" className="p-3">
-        <Toast
-          onClose={() => setShowToast(false)}
-          show={showToast}
-          delay={1200}
-          autohide
-          bg="success"
-        >
-          <Toast.Header>
-            <strong className="me-auto">Prenotazione</strong>
-          </Toast.Header>
-          <Toast.Body className="text-white">
-            Reindirizzamento alla prenotazione in corso…
-          </Toast.Body>
-        </Toast>
-      </ToastContainer>
-    </>
+            <Button
+              variant="transparent"
+              size="sm"
+              className="btnVediCard"
+              onClick={() => onDelete(id)}
+            >
+              Elimina
+            </Button>
+          </div>
+        )}
+      </Card.Body>
+    </Card>
   );
 };
 

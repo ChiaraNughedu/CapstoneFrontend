@@ -1,17 +1,51 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Container, Row, Col, Form, Button, Alert, Spinner } from 'react-bootstrap';
+import PrenotazioniComp from './PrenotazioniComp'; // Importa il componente PrenotazioniComp
 
 const AddPrenotazioneComp = () => {
-  const { idVilla } = useParams(); // deve essere passato come /prenota/:idVilla
+  const { idVilla } = useParams(); // /prenota/:idVilla
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
 
   const [dataInizio, setDataInizio] = useState('');
   const [dataFine, setDataFine] = useState('');
+  const [villaNome, setVillaNome] = useState('');
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  // Fetch nome della villa al caricamento
+  useEffect(() => {
+    const fetchVilla = async () => {
+      try {
+        const res = await fetch(`https://localhost:7141/api/Ville/${idVilla}`);
+        const contentType = res.headers.get('content-type');
+        
+        if (!res.ok) {
+          const errorText = contentType?.includes('application/json')
+            ? (await res.json()).message
+            : 'Errore nel recupero della villa';
+          throw new Error(errorText);
+        }
+        
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('La risposta non è in formato JSON');
+        }
+        
+        const data = await res.json();
+        console.log("Villa data:", data);
+        setVillaNome(data.nomeVilla); 
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVilla();
+  }, [idVilla]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +56,7 @@ const AddPrenotazioneComp = () => {
     }
 
     try {
-      const response = await fetch(`/api/Prenotazioni`, {
+      const response = await fetch(`https://localhost:7141/api/Prenotazioni`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -41,50 +75,62 @@ const AddPrenotazioneComp = () => {
       }
 
       setSuccess('Prenotazione effettuata con successo!');
-      setTimeout(() => navigate('/prenotazioni'), 1500); // Redirect dopo 1.5s
+      setTimeout(() => navigate('/prenotazioni'), 1500);
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white shadow-lg rounded-xl">
-      <h2 className="text-2xl font-semibold mb-4">Prenota la villa</h2>
+    <Container className="my-3 px-0 pt-3 pb-4 ">
+      <Row className="justify-content-between">
+        <Col md={4} className="">
+          {loading ? (
+            <div className="text-center my-4">
+              <Spinner animation="border" />
+            </div>
+          ) : (
+            <>
+              <h2 className="homeH5 py-3 mb-4">Prenota {villaNome}</h2>
 
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-      {success && <p className="text-green-500 mb-2">{success}</p>}
+              {error && <Alert variant="danger">{error}</Alert>}
+              {success && <Alert variant="success">{success}</Alert>}
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <label>
-          Check-in:
-          <input
-            type="date"
-            value={dataInizio}
-            onChange={(e) => setDataInizio(e.target.value)}
-            className="border p-2 rounded w-full"
-            required
-          />
-        </label>
+              <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formDataInizio">
+                  <Form.Label><strong>Check-in</strong></Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={dataInizio}
+                    onChange={(e) => setDataInizio(e.target.value)}
+                    required
+                  />
+                </Form.Group>
 
-        <label>
-          Check-out:
-          <input
-            type="date"
-            value={dataFine}
-            onChange={(e) => setDataFine(e.target.value)}
-            className="border p-2 rounded w-full"
-            required
-          />
-        </label>
+                <Form.Group className="mb-3" controlId="formDataFine">
+                  <Form.Label><strong>Check-out</strong></Form.Label>
+                  <Form.Control
+                    type="date"
+                    value={dataFine}
+                    onChange={(e) => setDataFine(e.target.value)}
+                    required
+                  />
+                </Form.Group>
 
-        <button
-          type="submit"
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Conferma prenotazione
-        </button>
-      </form>
-    </div>
+                <Button variant="transparent" type="submit" className="btnVedi mt-3">
+                  Conferma prenotazione
+                </Button>
+              </Form>
+            </>
+          )}
+        </Col>
+        <Col md={1} className="bordinoGold">
+        </Col>
+        <Col md={6} className="d-none d-md-block"> 
+        <PrenotazioniComp/>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
