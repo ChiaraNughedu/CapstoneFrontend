@@ -45,7 +45,7 @@ const PrenotazioniComp = () => {
 
   return (
     <Container className="prenotazioniContainer px-0 py-3">
-      <h2 className="homeH5 pb-3">
+      <h2 className="text-center loginTitle pb-3">
         {ruolo === 'Admin' ? 'Tutte le prenotazioni' : 'Le tue prenotazioni'}
       </h2>
 
@@ -82,7 +82,7 @@ const PrenotazioniComp = () => {
                 )}
               </div>
 
-              <div className="d-flex gap-2 mt-3">
+              <div className="d-flex justify-content-between gap-2 mt-3">
                 <Button
                   variant="transparent"
                   className="btnVedi"

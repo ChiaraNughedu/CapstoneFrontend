@@ -82,22 +82,22 @@ const AddPrenotazioneComp = () => {
   };
 
   return (
-    <Container className="my-3 px-0 pt-3 pb-4 ">
+    <Container className="mt-4 px-0 pt-3 pb-4 ">
       <Row className="justify-content-between">
-        <Col md={4} className="">
+        <Col md={5} className=" px-0">
           {loading ? (
             <div className="text-center my-4">
               <Spinner animation="border" />
             </div>
           ) : (
             <>
-              <h2 className="homeH5 py-3 mb-4">Prenota {villaNome}</h2>
+              <h2 className="loginTitle text-center py-3 mb-4">Prenota {villaNome}</h2>
 
               {error && <Alert variant="danger">{error}</Alert>}
               {success && <Alert variant="success">{success}</Alert>}
 
               <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formDataInizio">
+                <Form.Group className="mb-4" controlId="formDataInizio">
                   <Form.Label><strong>Check-in</strong></Form.Label>
                   <Form.Control
                     type="date"
@@ -107,7 +107,7 @@ const AddPrenotazioneComp = () => {
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formDataFine">
+                <Form.Group className="mb-5" controlId="formDataFine">
                   <Form.Label><strong>Check-out</strong></Form.Label>
                   <Form.Control
                     type="date"
@@ -117,16 +117,22 @@ const AddPrenotazioneComp = () => {
                   />
                 </Form.Group>
 
-                <Button variant="transparent" type="submit" className="btnVedi mt-3">
-                  Conferma prenotazione
-                </Button>
+                <div className="d-flex justify-content-between align-items-center mt-5">
+                  <Button variant="transparent" className="btnVedi" onClick={() => navigate(-1)}>
+                     Annulla
+                  </Button>
+
+                  <Button variant="transparent" type="submit" className="btnVedi">
+                     Conferma prenotazione
+                 </Button>
+                </div>
+
               </Form>
             </>
           )}
         </Col>
-        <Col md={1} className="bordinoGold">
-        </Col>
-        <Col md={6} className="d-none d-md-block"> 
+        
+        <Col md={6} className="bordinoGoldLeft d-none d-md-block"> 
         <PrenotazioniComp/>
         </Col>
       </Row>

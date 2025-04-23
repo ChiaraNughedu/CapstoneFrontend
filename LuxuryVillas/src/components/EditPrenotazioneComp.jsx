@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { updatePrenotazione } from '../redux/reducers/prenotazioniSlice';
+import { updatePrenotazione, fetchPrenotazioni } from '../redux/reducers/prenotazioniSlice';
 
 const EditPrenotazioneComp = () => {
-  const { id } = useParams();
+  const { idPrenotazione } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, ruolo } = useSelector((state) => state.auth);
   const { lista } = useSelector((state) => state.prenotazioni);
+
 
   const [formData, setFormData] = useState({
     dataInizio: '',
@@ -17,19 +18,50 @@ const EditPrenotazioneComp = () => {
   });
 
   useEffect(() => {
-    const prenotazione = lista.find((p) => p.id === parseInt(id));
+    if (!idPrenotazione) {
+      console.error('ID non definito nei parametri URL');
+      navigate('/prenotazioni');
+      return;
+    }
+
+    const prenotazione = lista.find((p) => p.id === parseInt(idPrenotazione));
+    console.log('Prenotazione trovata:', prenotazione);
+    
     if (prenotazione) {
       setFormData({
+        villaId: prenotazione.villaId, 
         dataInizio: prenotazione.dataInizio,
         dataFine: prenotazione.dataFine,
       });
+    } else {
+      console.error('Prenotazione non trovata con ID:', idPrenotazione);
+      navigate('/prenotazioni');
     }
-  }, [id, lista]);
+  }, [idPrenotazione, lista, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updatePrenotazione({ id, formData, token }));
-    navigate('/prenotazioni');
+    
+    if (!idPrenotazione) {
+      console.error('ID mancante per l\'aggiornamento');
+      return;
+    }
+    
+    try {
+      console.log('Invio aggiornamento per ID:', idPrenotazione, 'con dati:', formData);
+      
+      await dispatch(updatePrenotazione({ 
+        id: parseInt(idPrenotazione), 
+        formData, 
+        token 
+      })).unwrap();
+      
+      await dispatch(fetchPrenotazioni({ token, ruolo }));
+      
+      navigate('/prenotazioni');
+    } catch (error) {
+      console.error('Errore durante l\'aggiornamento della prenotazione', error);
+    }
   };
 
   return (
@@ -58,9 +90,15 @@ const EditPrenotazioneComp = () => {
               />
             </Form.Group>
 
-            <Button className="btnVedi mt-3" variant="transparent" type="submit">
-              Salva Modifiche
-            </Button>
+            <div className="d-flex justify-content-between align-items-center mt-5">
+              <Button variant="transparent" className="btnVedi" onClick={() => navigate(-1)}>
+                Annulla
+              </Button>
+
+              <Button className="btnVedi" variant="transparent" type="submit">
+                Salva Modifiche
+              </Button>
+            </div>
           </Form>
         </Col>
       </Row>

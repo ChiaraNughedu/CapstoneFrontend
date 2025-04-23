@@ -91,10 +91,10 @@ const LoginComponent = () => {
 
           {token ? (
             <div className="text-center">
-              <Alert className="loginAlert py-3 mx-auto w-75 border-0">
+              <Alert className="loginAlert py-3 my-4 mx-auto w-75 border-0">
                 Login effettuato come: <strong>{username}</strong>
               </Alert>
-              <Button variant="transparent" className="btnVedi" onClick={handleLogout}>
+              <Button variant="transparent" className="btnVedi mt-2" onClick={handleLogout}>
                 Logout
               </Button>
             </div>

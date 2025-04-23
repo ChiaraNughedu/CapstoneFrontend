@@ -48,6 +48,21 @@
   color: #f7dca3;
 }
 
+.navbar-toggler.collapsed {
+  background-color: transparent;
+  border: none;
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23dbb666' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  border: none;
+}
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
 
 /*STILE HOMEPAGE*/
 .BVtitle {
@@ -99,7 +114,7 @@
 }
 
 .scopriTitle {
-  font-size: 3em;
+  font-size: 3.1em;
   color: #796e57;
   margin-top: 7vh;
   letter-spacing: 3px;
@@ -153,6 +168,13 @@
   border: 1px solid #dbb666;
 }
 /*PAGINA VILLE*/
+.villeTitle {
+  font-family: "Bilbo Swash Caps", cursive;
+  font-size: 3.9em;
+  color: #dbb666;
+  margin-top: 5vh;
+  letter-spacing: 3.5px;
+}
 .btnVediSelect {
   background-color: #faf6ee;
   color: #796e57;
@@ -192,6 +214,11 @@
 }
 .bordinoGold {
   border-right: 1px solid #aa9567;
+  
+}
+.bordinoGoldLeft {
+  border-left: 1px solid #aa9567;
+  padding-left: 50px;
 }
 
 /*LOGIN*/ 
@@ -199,21 +226,20 @@
   height: 100vh;
 }
 .loginBox {
-  border: 2px solid #dbb666;
+  border: 1px solid #dbb666;
   border-radius: 10px;
+
 }
 .loginTitle {
   font-family: "Bilbo Swash Caps", cursive;
-  font-size: 2.9em;
+  font-size: 3.7em;
   color: #dbb666;
   margin-top: 15px;
   letter-spacing: 3.5px;
-  font-weight: 600;
 }
 .loginAlert {
   background-color: #f3cd7b;
   color: #796e57;
-  margin-top: 10px;
   letter-spacing: 1px;
 }
 .loginLink {
@@ -317,7 +343,7 @@
   height: 100%;
 }
 .effettuaContainer {
-  height: 100vh;
+  height: 100%;
 
 }
 .editPrenotazioneContainer {
@@ -328,6 +354,7 @@
 .footer {
   color: #796e57;
   margin-top: 2vh;
+  margin-bottom: 2vh;
   padding-top: 5vh;
   border-top: 1px solid #dbb666;
 }
@@ -338,16 +365,22 @@
   letter-spacing: 1.2px;
   font-weight: 700;
 }
+.footerLink {
+  margin-bottom: 0;
+}
 .footerLink a {
+  font-size: 0.9em;
+  letter-spacing: 0.7px;;
   color: #796e57;
   text-decoration: none;
+ 
 }
 .footerLink a:hover {
   color: #796e57;
   text-decoration: underline;
+  
 }
 .footerIcon {
   color: #796e57;
-  font-size: 1.5em;
-  margin-right: 10px;
+  font-size: 1.3em;
 } 

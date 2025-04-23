@@ -65,12 +65,12 @@ const VilleComponent = () => {
     <Container className="pb-5">
       <Row>
         <Col className="text-center py-2">
-        <h2 className="text-uppercase scopriTitle">{isAdmin ? "Gestione Ville" : "Le Nostre Ville"}</h2>
+        <h2 className="villeTitle">{isAdmin ? "Gestione Ville" : "Le Nostre Ville"}</h2>
         </Col>
       </Row>
 
     <Row className="d-flex justify-content-between align-items-center mt-4 mb-5">
-       <Col md={9}>
+       <Col xs={6} md={9}>
         <Button className="btnVedi" variant="transparent"
            onClick={() => {
              navigate(-1);
@@ -80,7 +80,7 @@ const VilleComponent = () => {
         </Button>
        </Col>
 
-       <Col md={3} className="text-end">
+       <Col xs={6} md={3} className="text-end">
   <Dropdown>
     <Dropdown.Toggle variant="secondary" className="btnVediSelect">
       {categoriaFiltro === "Tutte" ? "Tutte le Categorie" : categoriaFiltro}

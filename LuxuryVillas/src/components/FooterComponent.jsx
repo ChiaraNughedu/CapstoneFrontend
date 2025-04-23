@@ -20,14 +20,14 @@ const FooterComponent = () => {
           </Col>
           <Col md={2}>
             <h5 className="footerH5 text-uppercase">Seguici</h5>
-            <a href="#" className="text-dark me-3">
-              <i className="bi bi-facebook"></i>
+            <a href="#" className="me-3">
+              <i className="footerIcon bi bi-facebook"></i>
             </a>
-            <a href="#" className="text-dark me-3">
-              <i className="bi bi-instagram"></i>
+            <a href="#" className="mx-2">
+              <i className="footerIcon bi bi-instagram"></i>
             </a>
-            <a href="#" className="text-dark">
-              <i className="bi bi-twitter-x"></i>
+            <a href="#" className="mx-3">
+              <i className="footerIcon bi bi-twitter-x"></i>
             </a>
           </Col>
         </Row>
