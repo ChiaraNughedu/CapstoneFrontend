@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -14,6 +14,7 @@ const DetailsComponent = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [villa, setVilla] = useState(null);
+  const [allVillas, setAllVillas] = useState([]); // Aggiungi un stato per tutte le ville
   const [showModal, setShowModal] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -23,6 +24,7 @@ const DetailsComponent = () => {
   const isAdmin = ruolo === "Admin";
 
   useEffect(() => {
+    // Ottieni il dettaglio della villa attuale
     fetch(`https://localhost:7141/api/Ville/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Errore nel caricamento");
@@ -32,6 +34,16 @@ const DetailsComponent = () => {
         setVilla(data);
       })
       .catch((err) => console.error("Errore nel recupero dettagli:", err));
+
+    fetch(`https://localhost:7141/api/Ville`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAllVillas(data);
+      })
+      .catch((err) => console.error("Errore nel recupero lista ville:", err));
+
+ 
+    window.scrollTo(0, 0);
   }, [id]);
 
   if (!villa) return <p className="text-center mt-5">Caricamento in corso...</p>;
@@ -58,37 +70,61 @@ const DetailsComponent = () => {
     setCurrentIndex((prev) => (prev - 1 + immaginiSecondarie.length) % immaginiSecondarie.length);
   };
 
+
+  const getNextVillaId = () => {
+    const currentId = parseInt(id, 10);
+    const currentIndex = allVillas.findIndex((villa) => villa.id === currentId);
+    if (currentIndex === -1 || currentIndex === allVillas.length - 1) {
+      return null; 
+    }
+    return allVillas[currentIndex + 1].id; 
+  };
+
+  const nextVillaId = getNextVillaId();
+
+  const handleNextVilla = () => {
+    if (nextVillaId) {
+      navigate(`/Ville/${nextVillaId}`);
+      
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 10);
+    }
+  };
+
+  const handleGoBack = () => {
+    navigate(-1);
+
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 10);
+  };
+
   return (
-    <Container className="py-5">
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <Button className="btnVedi" variant="transparent" onClick={() => navigate(-1)}>
+    <Container className="mt-5 pb-5 ">
+      <Row className="justify-content-between d-flex align-items-center">
+        <Col md={6}>
+        <Button className="btnVedi" variant="transparent" onClick={handleGoBack}>
           Torna Indietro
         </Button>
-
-        {!isAdmin && (
-          isAuthenticated ? (
-            <Button className="btnVedi" variant="transparent" onClick={() => navigate(`/prenota/${id}`)}>
-              Prenota ora
+        </Col>
+        <Col md={6} className="text-end">
+          {/* Bottone villa successiva */}
+          {nextVillaId && (
+            <Button className="btnVedi" variant="transparent" onClick={handleNextVilla}>
+              Villa Successiva
             </Button>
-          ) : (
-            <Button className="btnVedi" variant="transparent" disabled>
-              Effettua il login per prenotare
-            </Button>
-          )
-        )}
-      </div>
+          )}
+        </Col>
+      </Row>
 
-      
       <Row className="text-center">
         <h2 className="detailsNameVilla">{villa.nomeVilla}</h2>
       </Row>
-      <hr className="mt-0 mb-4"/>
+      <hr className="separateHr mt-1 mb-4"/>
       <Row>
-      <Col md={6}>
-          
+        <Col md={6}>
           <p className="villaDescrizione me-3">{villa.descrizione}</p>
-
-    
         </Col>
 
         <Col md={6}>
@@ -99,32 +135,46 @@ const DetailsComponent = () => {
             className="rounded shadow mt-2"
           />
         </Col>
+      </Row>
 
+      <hr className="separateHr mt-4 mb-4" />
+      <Row className="mt-2">
+        <Col md={6}>
+          <h5 className="villaLocalita mt-3 text-start">{villa.localita}</h5>
+        </Col>
+        <Col md={6}>
+          <p className="prezzoText text-end py-0 my-0">Prezzo per notte</p>
+          <h5 className="villaPrezzo mt-1 py-0 float-end">
+            {villa.prezzo.toLocaleString("it-IT", {
+              style: "currency",
+              currency: "EUR",
+            })}
+          </h5>
+
+        </Col>
+      </Row>
+      <Row className="text-end justify-content-between align-items-center mt-2">
+        <Col md={6}></Col>
+        <Col md={6} className="">
+        {!isAdmin && (
+         isAuthenticated ? (
+          <Button className="btnVedi" variant="transparent" onClick={() => navigate(`/prenota/${id}`)}>
+            Prenota ora
+          </Button>
+        ) : (
+          <Button className="btnVedi" variant="transparent" disabled>
+            Effettua il login per prenotare
+          </Button>
+        )
+       )}
+        </Col>
 
       </Row>
 
-      <hr className="mt-4 mb-4" />
-     
-      <Row className="mt-2">
-            <Col md={6}>
-            <h5 className="villaLocalita mt-3 text-start">
-            {villa.localita}</h5>
-            </Col>
-
-            <Col md={6}>
-            <p className="prezzoText text-end py-0 my-0">Prezzo per notte</p>
-            <h5 className="villaPrezzo mt-1 py-0 float-end">
-              {villa.prezzo.toLocaleString("it-IT", {
-                style: "currency",
-                currency: "EUR",
-              })}
-              </h5>
-              </Col>
-          </Row>
-      
-          <hr className="mt-4 mb-4" />
+      <hr className="separateHr mt-4 mb-4" />
 
       <Row className="mt-4">
+      <h6 className="text-center villaPrezzo mb-4"><strong>Vedi Altro...</strong></h6>
         <div className="d-flex flex-wrap justify-content-between gap-3 float-end">
           {immaginiSecondarie.map((img, index) => (
             <Image
@@ -140,6 +190,8 @@ const DetailsComponent = () => {
           ))}
         </div>
       </Row>
+
+     
 
       <Modal show={showModal} onHide={() => setShowModal(false)} centered size="md">
         <Modal.Body className="text-center">

@@ -16,6 +16,10 @@ import AboutUsComp from './components/AboutUsComponent';
 import PrenotazioniComp from './components/PrenotazioniComp';
 import AddPrenotazioneComp from './components/AddPrenotazioneComp';
 import EditPrenotazioneComp from './components/EditPrenotazioneComp';
+import BlogComponent from './components/BlogComponent';
+import BlogDetailComp from './components/BlogDetailComp';
+import EditBlogComp from './components/EditBlogComp';
+import AddVillaComp from './components/AddVillaComp';
 
 
 function App() {
@@ -37,6 +41,12 @@ function App() {
         <Route path="/prenotazioni" element={<PrenotazioniComp />} />
         <Route path="/prenota/:idVilla" element={<AddPrenotazioneComp />} />
         <Route path="/modifica-prenotazione/:idPrenotazione" element={<EditPrenotazioneComp />} />
+        <Route path="/blog" element={<BlogComponent />} />
+        <Route path="/blog/:id" element={<BlogDetailComp />} />
+        <Route path="/blog/modifica/:id" element={<EditBlogComp />} />
+        <Route path="/admin/aggiungi-villa" element={<AddVillaComp />} />
+
+
 
 
       </Routes>

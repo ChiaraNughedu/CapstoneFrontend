@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Container, Row, Col, Form, Button, Alert, Spinner } from 'react-bootstrap';
-import PrenotazioniComp from './PrenotazioniComp'; // Importa il componente PrenotazioniComp
+import PrenotazioniComp from './PrenotazioniComp';
 
 const AddPrenotazioneComp = () => {
-  const { idVilla } = useParams(); // /prenota/:idVilla
+  const { idVilla } = useParams();
   const navigate = useNavigate();
   const { token } = useSelector((state) => state.auth);
 
@@ -16,7 +16,6 @@ const AddPrenotazioneComp = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Fetch nome della villa al caricamento
   useEffect(() => {
     const fetchVilla = async () => {
       try {
@@ -75,22 +74,27 @@ const AddPrenotazioneComp = () => {
       }
 
       setSuccess('Prenotazione effettuata con successo!');
-      setTimeout(() => navigate('/prenotazioni'), 1500);
+      setTimeout(() => {
+        navigate('/prenotazioni');
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+        }, 100);
+      }, 1500);
     } catch (err) {
       setError(err.message);
     }
   };
 
   return (
-    <Container className="mt-4 px-0 pt-3 pb-4 ">
-      <Row className="justify-content-between">
-        <Col md={5} className=" px-0">
+    <Container className="mt-4 pt-3 pb-4">    
+      <Row className="justify-content-center justify-content-md-between">
+        <Col xs={12} sm={10} md={5} className="mb-4 mb-md-0">
           {loading ? (
             <div className="text-center my-4">
               <Spinner animation="border" />
             </div>
           ) : (
-            <>
+            <>     
               <h2 className="loginTitle text-center py-3 mb-4">Prenota {villaNome}</h2>
 
               {error && <Alert variant="danger">{error}</Alert>}
@@ -118,22 +122,26 @@ const AddPrenotazioneComp = () => {
                 </Form.Group>
 
                 <div className="d-flex justify-content-between align-items-center mt-5">
-                  <Button variant="transparent" className="btnVedi" onClick={() => navigate(-1)}>
-                     Annulla
+                  <Button variant="transparent" className="btnVedi" onClick={() => {
+                    navigate(-1);
+                    setTimeout(() => {
+                      window.scrollTo(0, 0);
+                    }, 100);
+                  }}>
+                    Torna indietro
                   </Button>
 
                   <Button variant="transparent" type="submit" className="btnVedi">
-                     Conferma prenotazione
-                 </Button>
+                    Conferma prenotazione
+                  </Button>
                 </div>
-
               </Form>
             </>
           )}
         </Col>
         
-        <Col md={6} className="bordinoGoldLeft d-none d-md-block"> 
-        <PrenotazioniComp/>
+        <Col xs={12} sm={10} md={6} className="bordinoGoldLeft">
+          <PrenotazioniComp/>
         </Col>
       </Row>
     </Container>

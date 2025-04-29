@@ -47,13 +47,13 @@ const EditVillaComp = () => {
   };
 
   return (
-    <Container className="py-5">
+    <Container className="mt-5 pb-5">
       <h2 className="homeH5 text-center mb-4">Modifica Villa</h2>
       {error && <Alert variant="danger">{error}</Alert>}
 
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label><strong>Nome della Villa</strong></Form.Label>
+          <Form.Label className="py-2"><strong>Nome della Villa</strong></Form.Label>
           <Form.Control
             type="text"
             name="nomeVilla"
@@ -64,7 +64,7 @@ const EditVillaComp = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label><strong>Località</strong></Form.Label>
+          <Form.Label className="py-2"><strong>Località</strong></Form.Label>
           <Form.Control
             type="text"
             name="localita"
@@ -75,7 +75,7 @@ const EditVillaComp = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label><strong>Prezzo per notte</strong></Form.Label>
+          <Form.Label className="py-2"><strong>Prezzo per notte</strong></Form.Label>
           <Form.Control
             type="text"
             name="prezzo"
@@ -86,7 +86,7 @@ const EditVillaComp = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label><strong>Immagine di Copertina (URL)</strong></Form.Label>
+          <Form.Label className="py-2"><strong>Immagine di Copertina (URL)</strong></Form.Label>
           <Form.Control
             type="text"
             name="imgCopertina"
@@ -97,7 +97,7 @@ const EditVillaComp = () => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label><strong>Descrizione</strong></Form.Label>
+          <Form.Label className="py-2"><strong>Descrizione</strong></Form.Label>
           <Form.Control
           as="textarea"
           rows={7} 
@@ -109,7 +109,7 @@ const EditVillaComp = () => {
           />
         </Form.Group>
 
-        <div className="d-flex justify-content-between mt-4">
+        <div className="d-flex justify-content-between mt-5">
   <Button
     variant="transparent" className="btnVedi"
     onClick={() => navigate(-1)}

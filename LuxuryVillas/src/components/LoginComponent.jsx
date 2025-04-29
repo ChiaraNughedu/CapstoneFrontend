@@ -15,6 +15,7 @@ const LoginComponent = () => {
     password: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -28,55 +29,125 @@ const LoginComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-
+    setLoading(true);
+  
     const endpoint = isLogin ? "/api/Auth/login" : "/api/Auth/register";
+    
+    
+    if (!isLogin) {
+      if (!formData.nome || !formData.cognome || !formData.email || !formData.username || !formData.password) {
+        setError("Tutti i campi sono obbligatori");
+        setLoading(false);
+        return;
+      }
+    }
+    
+    
     const payload = isLogin
       ? {
           username: formData.username,
           password: formData.password,
         }
-      : formData;
-
+      : {
+          nome: formData.nome,
+          cognome: formData.cognome,
+          email: formData.email,
+          username: formData.username,
+          password: formData.password,
+        };
+    
+    console.log("Sending payload:", payload);
+    console.log("To endpoint:", endpoint);
+  
     try {
       const res = await fetch(`https://localhost:7141${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+  
+      const contentType = res.headers.get("content-type");
+      console.log("Response status:", res.status);
+      console.log("Content type:", contentType);
+  
+      if (!res.ok) {
+    
+        if (contentType && contentType.includes("application/json")) {
+          const errorData = await res.json();
+          console.error("Error data:", errorData);
+          throw new Error(errorData.message || errorData.error || "Errore nella richiesta.");
+        } else {
+          const errorText = await res.text();
+          console.error("Error text:", errorText);
+          throw new Error(errorText || "Errore generico.");
+        }
+      }
 
-      if (!res.ok) throw new Error("Errore nel login o nella registrazione");
-
-      const data = await res.json();
-
-      dispatch(
-        setUser({
-          token: data.token,
-          ruolo: data.ruolo,
-          username: data.username,
-          email: data.email,
-        })
-      );
-
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("ruolo", data.ruolo);
-      localStorage.setItem("email", data.email);
-      localStorage.setItem("username", data.username);
-
-      if (data.ruolo === "Admin") {
-        navigate("/admin/dashboard");
+      if (!isLogin) {
+       
+        setError("");
+        alert("Registrazione completata con successo! Ora puoi effettuare il login.");
+        setIsLogin(true);
+     
+        setFormData({
+          nome: "",
+          cognome: "",
+          email: "",
+          username: "",
+          password: "",
+        });
       } else {
-        navigate("/user/dashboard");
+        
+        const data = await res.json();
+        console.log("Login success:", data);
+    
+        dispatch(
+          setUser({
+            token: data.token,
+            ruolo: data.ruolo,
+            username: data.username,
+            email: data.email,
+          })
+        );
+    
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("ruolo", data.ruolo);
+        localStorage.setItem("email", data.email);
+        localStorage.setItem("username", data.username);
+    
+        if (data.ruolo === "Admin") {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/user/dashboard");
+        }
       }
     } catch (err) {
-      setError(err.message);
+      console.error("Error caught:", err);
+      setError(err.message || "Si è verificato un errore. Riprova.");
+    } finally {
+      setLoading(false);
     }
   };
-
+  
   const handleLogout = () => {
     dispatch(clearUser());
     localStorage.clear();
     alert("Logout effettuato con successo!");
     navigate("/login");
+  };
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+    setError(""); 
+  
+    if (!isLogin) {
+      setFormData({
+        ...formData,
+        nome: "",
+        cognome: "",
+        email: "",
+      });
+    }
   };
 
   return (
@@ -165,8 +236,13 @@ const LoginComponent = () => {
                   />
                 </Form.Group>
 
-                <Button variant="transparent" type="submit" className="w-75 btnVedi">
-                  {isLogin ? "Accedi" : "Registrati"}
+                <Button 
+                  variant="transparent" 
+                  type="submit" 
+                  className="w-75 btnVedi"
+                  disabled={loading}
+                >
+                  {loading ? "Caricamento..." : (isLogin ? "Accedi" : "Registrati")}
                 </Button>
               </Form>
 
@@ -174,7 +250,8 @@ const LoginComponent = () => {
                 <Button
                   className="loginLink"
                   variant="link"
-                  onClick={() => setIsLogin(!isLogin)}
+                  onClick={toggleForm}
+                  disabled={loading}
                 >
                   {isLogin
                     ? "Non hai un account? Registrati"
@@ -185,7 +262,6 @@ const LoginComponent = () => {
           )}
         </Col>
       </Row>
-   
     </Container>
   );
 };

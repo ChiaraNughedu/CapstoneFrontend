@@ -69,7 +69,7 @@ const VilleComponent = () => {
         </Col>
       </Row>
 
-    <Row className="d-flex justify-content-between align-items-center mt-4 mb-5">
+    <Row className="d-flex justify-content-between align-items-center mt-3 mb-5">
        <Col xs={6} md={9}>
         <Button className="btnVedi" variant="transparent"
            onClick={() => {
@@ -113,6 +113,21 @@ const VilleComponent = () => {
         I nostri servizi includono concierge, chef privati e personale dedicato per soddisfare ogni tua esigenza.
 
       </p>
+
+            {/* Bottone "Aggiungi Villa" solo per Admin */}
+            {isAdmin && (
+        <Row className="mt-5 mb-4">
+          <Col md={12}>
+            <Button
+              className="btnVedi px-5"
+              variant="transparent"
+              onClick={() => navigate("/admin/aggiungi-villa")}
+            >
+              Aggiungi Villa
+            </Button>
+          </Col>
+        </Row>
+      )}
     </div>
   </Col>
 

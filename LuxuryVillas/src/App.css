@@ -321,7 +321,7 @@
 .villaLocalita {
   font-family: "Bilbo Swash Caps", cursive;
   font-size: 1.5em;
-  color: #817a6c;
+  color: #dbb666;
 
   letter-spacing: 1.2px;
   font-weight: 600;
@@ -384,3 +384,53 @@
   color: #796e57;
   font-size: 1.3em;
 } 
+
+/*SEZIONE BLOG*/
+.blogCard {
+  background-color: #faf6ee;
+  border: none;
+}
+.blogDescrizione {
+  font-size: 1em;
+  color: #796e57;
+  margin-top: 0;
+  letter-spacing: 0.5px;
+  line-height: 1.8
+}
+.blogCardName {
+  font-family: "Bilbo Swash Caps", cursive;
+  font-size: 2.1em;
+  color: #dbb666;
+  margin-top: 4px;
+  margin-bottom: 0;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.blogImg {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.blogDetailCardName {
+  font-family: "Bilbo Swash Caps", cursive;
+  font-size: 3.2em;
+  color: #dbb666;
+  margin-top: 4px;
+  letter-spacing: 4px;
+  font-weight: 600;
+}
+.blogDetailImg {
+  width: 100%;
+  height: 60vh;
+  margin: 20px 0;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.blogDescrizioneDetail {
+  font-size: 1.1em;
+  color: #796e57;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+  line-height: 1.8
+}
