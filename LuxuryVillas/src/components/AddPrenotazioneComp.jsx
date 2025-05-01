@@ -28,14 +28,13 @@ const AddPrenotazioneComp = () => {
             : 'Errore nel recupero della villa';
           throw new Error(errorText);
         }
-        
+
         if (!contentType || !contentType.includes('application/json')) {
           throw new Error('La risposta non è in formato JSON');
         }
-        
+
         const data = await res.json();
-        console.log("Villa data:", data);
-        setVillaNome(data.nomeVilla); 
+        setVillaNome(data.nomeVilla);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -76,9 +75,7 @@ const AddPrenotazioneComp = () => {
       setSuccess('Prenotazione effettuata con successo!');
       setTimeout(() => {
         navigate('/prenotazioni');
-        setTimeout(() => {
-          window.scrollTo(0, 0);
-        }, 100);
+        setTimeout(() => window.scrollTo(0, 0), 100);
       }, 1500);
     } catch (err) {
       setError(err.message);
@@ -86,15 +83,16 @@ const AddPrenotazioneComp = () => {
   };
 
   return (
-    <Container className="mt-4 pt-3 pb-4">    
-      <Row className="justify-content-center justify-content-md-between">
-        <Col xs={12} sm={10} md={5} className="mb-4 mb-md-0">
+    <Container className="mt-4 pt-3 pb-4 px-3 px-md-5">
+     <Row className="flex-column flex-md-row align-items-start justify-content-md-between">
+
+        <Col xs={12} sm={10} md={6} lg={5} className="mb-5 mb-md-0">
           {loading ? (
             <div className="text-center my-4">
               <Spinner animation="border" />
             </div>
           ) : (
-            <>     
+            <>
               <h2 className="loginTitle text-center py-3 mb-4">Prenota {villaNome}</h2>
 
               {error && <Alert variant="danger">{error}</Alert>}
@@ -121,17 +119,23 @@ const AddPrenotazioneComp = () => {
                   />
                 </Form.Group>
 
-                <div className="d-flex justify-content-between align-items-center mt-5">
-                  <Button variant="transparent" className="btnVedi" onClick={() => {
-                    navigate(-1);
-                    setTimeout(() => {
-                      window.scrollTo(0, 0);
-                    }, 100);
-                  }}>
+                <div className="d-flex flex-column flex-sm-row justify-content-between align-items-center mt-4 gap-3">
+                  <Button
+                    variant="transparent"
+                    className="btnVedi w-100 w-sm-auto"
+                    onClick={() => {
+                      navigate(-1);
+                      setTimeout(() => window.scrollTo(0, 0), 100);
+                    }}
+                  >
                     Torna indietro
                   </Button>
 
-                  <Button variant="transparent" type="submit" className="btnVedi">
+                  <Button
+                    variant="transparent"
+                    type="submit"
+                    className="btnVedi w-100 w-sm-auto"
+                  >
                     Conferma prenotazione
                   </Button>
                 </div>
@@ -139,9 +143,9 @@ const AddPrenotazioneComp = () => {
             </>
           )}
         </Col>
-        
+
         <Col xs={12} sm={10} md={6} className="bordinoGoldLeft">
-          <PrenotazioniComp/>
+          <PrenotazioniComp />
         </Col>
       </Row>
     </Container>

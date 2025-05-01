@@ -45,10 +45,6 @@ function App() {
         <Route path="/blog/:id" element={<BlogDetailComp />} />
         <Route path="/blog/modifica/:id" element={<EditBlogComp />} />
         <Route path="/admin/aggiungi-villa" element={<AddVillaComp />} />
-
-
-
-
       </Routes>
     </BrowserRouter>
     

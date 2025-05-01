@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState} from "react";
 import { useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -24,7 +24,7 @@ const DetailsComponent = () => {
   const isAdmin = ruolo === "Admin";
 
   useEffect(() => {
-    // Ottieni il dettaglio della villa attuale
+    
     fetch(`https://localhost:7141/api/Ville/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Errore nel caricamento");
@@ -101,21 +101,21 @@ const DetailsComponent = () => {
   };
 
   return (
-    <Container className="mt-5 pb-5 ">
+    <Container className="detailsContainer mt-5 pb-5 ">
       <Row className="justify-content-between d-flex align-items-center">
-        <Col md={6}>
-        <Button className="btnVedi" variant="transparent" onClick={handleGoBack}>
-          Torna Indietro
-        </Button>
-        </Col>
-        <Col md={6} className="text-end">
-          {/* Bottone villa successiva */}
-          {nextVillaId && (
-            <Button className="btnVedi" variant="transparent" onClick={handleNextVilla}>
-              Villa Successiva
-            </Button>
-          )}
-        </Col>
+      <Col xs={6} md={6}>
+  <Button className="btnVedi" variant="transparent" onClick={handleGoBack}>
+    Torna Indietro
+  </Button>
+</Col>
+<Col xs={6} md={6} className="text-end">
+  {nextVillaId && (
+    <Button className="btnVedi" variant="transparent" onClick={handleNextVilla}>
+      Villa Successiva
+    </Button>
+  )}
+</Col>
+
       </Row>
 
       <Row className="text-center">
@@ -191,7 +191,6 @@ const DetailsComponent = () => {
         </div>
       </Row>
 
-     
 
       <Modal show={showModal} onHide={() => setShowModal(false)} centered size="md">
         <Modal.Body className="text-center">

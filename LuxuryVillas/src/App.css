@@ -2,13 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Meow+Script&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Signika+Negative:wght@300..700&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bilbo+Swash+Caps&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Meow+Script&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Signika+Negative:wght@300..700&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
+body {
+  background-color: #faf6ee;
+}
 
 #root {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: "quicksand", sans-serif;
-  background-color: #faf6ee;
   color: #585A5B;
   font-weight: 500;
 }
@@ -41,11 +43,14 @@
 .nav-link {
   color: #dbb666;
 }
-.nav-link:hover,
+.nav-link:hover {
+  color: #e6cc9a;
+  transition: all 0.3s ease;
+}
 .nav-link:active,
-.nav-linki:focus,
+.nav-link:focus,
 .nav-link:visited {
-  color: #f7dca3;
+  color: #dbb666;
 }
 
 .navbar-toggler.collapsed {
@@ -153,9 +158,7 @@
 }
 
 /*STILE CHI SIAMO PAGE*/
-.AboutUs {
-  font-weight: 500;
-}
+
 .aboutUsTitle {
   font-family: "Bilbo Swash Caps", cursive;
   font-size: 3.5em;
@@ -222,9 +225,7 @@
 }
 
 /*LOGIN*/ 
-.loginContainer {
-  height: 100vh;
-}
+
 .loginBox {
   border: 1px solid #dbb666;
   border-radius: 10px;
@@ -304,6 +305,7 @@
 }
 
 /*DETAILS PAGE*/
+
 .detailsNameVilla {
   font-family: "Bilbo Swash Caps", cursive;
   font-size: 3.2em;
@@ -339,16 +341,9 @@
 }
 
 /*PRENOTAZIONI*/
-.prenotazioniContainer {
-  height: 100%;
-}
-.effettuaContainer {
-  height: 100vh;
 
-}
-.editPrenotazioneContainer {
-  height: 100vh;
-}
+
+
 
 /*FOOTER*/
 .footer {
@@ -412,6 +407,8 @@
   object-fit: cover;
   border-radius: 8px;
 }
+
+
 .blogDetailCardName {
   font-family: "Bilbo Swash Caps", cursive;
   font-size: 3.2em;
@@ -421,11 +418,22 @@
   font-weight: 600;
 }
 .blogDetailImg {
-  width: 100%;
-  height: 60vh;
+  width: 98%;
+  height: 65vh;
   margin: 20px 0;
   object-fit: cover;
   border-radius: 8px;
+}
+@media (max-width: 768px) {
+  .blogDetailImg {
+    height: 30vh !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .blogDetailImg {
+    height: 20vh !important;
+  }
 }
 .blogDescrizioneDetail {
   font-size: 1.1em;

@@ -44,7 +44,7 @@ const VilleComponent = () => {
       })
         .then((res) => {
           if (res.ok) {
-            fetchVille(); // aggiorna la lista
+            fetchVille(); 
           } else {
             console.error("Errore durante l'eliminazione");
           }
@@ -74,7 +74,9 @@ const VilleComponent = () => {
         <Button className="btnVedi" variant="transparent"
            onClick={() => {
              navigate(-1);
-             window.scrollTo({ top: 0, behavior: "smooth" });
+             setTimeout(() => {
+              window.scrollTo(0, 0);
+            }, 10);
             }}
         >Torna Indietro
         </Button>
@@ -100,7 +102,7 @@ const VilleComponent = () => {
     
 
     <Row className="mt-4">
-  {/* Colonna sinistra con testo */}
+  
   <Col md={3}>
   <div className="bordinoGold h-100 pe-3" style={{ height: "100%", minHeight: "100%" }}>
     <p className="villaPlace"><strong>Scopri le nostre ville e appartamenti esclusivi.</strong></p>

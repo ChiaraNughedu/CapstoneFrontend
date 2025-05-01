@@ -17,7 +17,7 @@ const EditVillaComp = () => {
     fetch(`https://localhost:7141/api/Ville/${id}`)
       .then((res) => res.json())
       .then((data) => setVilla(data))
-      .catch((err) => setError("Errore nel recupero della villa"));
+      .catch(() => setError("Errore nel recupero della villa"));
   }, [id]);
 
   const handleChange = (e) => {

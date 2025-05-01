@@ -35,6 +35,9 @@ const BlogDetailComp = () => {
 
   const handleGoBack = () => {
     navigate(-1); 
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 10);
   };
 
   const handleNextArticle = () => {
@@ -45,18 +48,7 @@ const BlogDetailComp = () => {
 
   return (
     <Container className="mt-5 pb-5">
-      <Card className="blogCard ">
-        <Card.Title className="blogDetailCardName text-center my-3">{articoloSingolo.luogo}</Card.Title>
-        <hr className="separateHr" />
-        <Card.Img className="blogDetailImg" variant="top" src={articoloSingolo.imageUrl} />
-        <Card.Body>
-          <Card.Text className="blogDescrizioneDetail">{articoloSingolo.descrizione1}</Card.Text>
-          <Card.Text className="blogDescrizioneDetail">{articoloSingolo.descrizione2}</Card.Text>
-        </Card.Body>
-      </Card>
-      <hr className="separateHr" />
-
-      <Row className="mt-5 mb-4">
+       <Row className="mt-5 mb-1">
         <Col md={6}>
           <Button  variant="transparent" className="btnVedi" onClick={handleGoBack}>
             Torna Indietro
@@ -70,6 +62,17 @@ const BlogDetailComp = () => {
           )}
         </Col>
       </Row>
+      <Card className="blogCard">
+        <Card.Title className="blogDetailCardName text-center my-1">{articoloSingolo.luogo}</Card.Title>
+        <hr className="separateHr" />
+        <Card.Img className="blogDetailImg mx-auto" variant="top" src={articoloSingolo.imageUrl} />
+        <Card.Body>
+          <Card.Text className="blogDescrizioneDetail">{articoloSingolo.descrizione1}</Card.Text>
+          <Card.Text className="blogDescrizioneDetail">{articoloSingolo.descrizione2}</Card.Text>
+        </Card.Body>
+      </Card>
+      <hr className="separateHr" />
+
     </Container>
   );
 };

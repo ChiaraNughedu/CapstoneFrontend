@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { clearUser } from "../redux/reducers/authReducer"; // Cambiato logout con clearUser
+import { clearUser } from "../redux/reducers/authReducer"; 
 import { useNavigate } from "react-router-dom";
 import { Button, Alert } from "react-bootstrap";
 

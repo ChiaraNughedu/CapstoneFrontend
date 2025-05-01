@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Container } from "react-bootstrap";
+import { Button, Form, Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const AddVillaComp = () => {
@@ -8,7 +8,7 @@ const AddVillaComp = () => {
   const [immagini, setImmagini] = useState(["", "", "", "", "", ""]);
   const [prezzo, setPrezzo] = useState("");
   const [localita, setLocalita] = useState("");
-  const [categoriaId, setCategoriaId] = useState(1); // Villa default
+  const [categoriaId, setCategoriaId] = useState(1);
   const [descrizione, setDescrizione] = useState("");
   const navigate = useNavigate();
 
@@ -20,7 +20,6 @@ const AddVillaComp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const newVilla = {
       nomeVilla,
       imgCopertina,
@@ -38,9 +37,7 @@ const AddVillaComp = () => {
 
     fetch("https://localhost:7141/api/Ville", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newVilla),
     })
       .then((res) => res.json())
@@ -49,91 +46,106 @@ const AddVillaComp = () => {
         navigate("/admin/ville");
       })
       .catch((err) => {
-        console.error("Errore nell'aggiunta della villa:", err);
+        console.error("Errore:", err);
         alert("Errore durante l'aggiunta della villa.");
       });
   };
 
   const handleBack = () => {
     navigate(-1);
-    setTimeout(() => {  
-        
-        window.scrollTo(0, 0);
-      }, 10); 
+    setTimeout(() => window.scrollTo(0, 0), 10);
   };
 
   return (
-    <Container className="mt-3 pb-5">
+    <Container className="mt-4 pb-5">
       <h2 className="homeH5 text-center py-4">Aggiungi Nuova Villa</h2>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="nomeVilla">
-          <Form.Label className="pt-2"><strong>Nome Villa</strong></Form.Label>
-          <Form.Control
-            type="text"
-            value={nomeVilla}
-            onChange={(e) => setNomeVilla(e.target.value)}
-            required
-            maxLength={100}
-          />
-        </Form.Group>
+        <Row>
+          <Col xs={12} md={6}>
+            <Form.Group controlId="nomeVilla" className="mb-3">
+              <Form.Label><strong>Nome Villa</strong></Form.Label>
+              <Form.Control
+                type="text"
+                value={nomeVilla}
+                onChange={(e) => setNomeVilla(e.target.value)}
+                required
+                maxLength={100}
+              />
+            </Form.Group>
+          </Col>
 
-        <Form.Group controlId="imgCopertina">
-          <Form.Label className="pt-2"><strong>Immagine di Copertura</strong></Form.Label>
-          <Form.Control
-            type="url"
-            value={imgCopertina}
-            onChange={(e) => setImgCopertina(e.target.value)}
-          />
-        </Form.Group>
+          <Col xs={12} md={6}>
+            <Form.Group controlId="imgCopertina" className="mb-3">
+              <Form.Label><strong>Immagine di Copertina</strong></Form.Label>
+              <Form.Control
+                type="url"
+                value={imgCopertina}
+                onChange={(e) => setImgCopertina(e.target.value)}
+              />
+            </Form.Group>
+          </Col>
+        </Row>
 
-        {immagini.map((img, idx) => (
-          <Form.Group key={idx} controlId={`immagine${idx + 1}`}>
-            <Form.Label className="pt-2"><strong>{`Immagine ${idx + 1}`}</strong></Form.Label>
-            <Form.Control
-              type="url"
-              value={img}
-              onChange={(e) => handleImmagineChange(idx, e.target.value)}
-            />
-          </Form.Group>
-        ))}
+        <Row>
+          {immagini.map((img, idx) => (
+            <Col xs={12} sm={6} md={4} key={idx}>
+              <Form.Group controlId={`immagine${idx + 1}`} className="mb-3">
+                <Form.Label><strong>{`Immagine ${idx + 1}`}</strong></Form.Label>
+                <Form.Control
+                  type="url"
+                  value={img}
+                  onChange={(e) => handleImmagineChange(idx, e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+          ))}
+        </Row>
 
-        <Form.Group controlId="prezzo">
-          <Form.Label className="pt-2"><strong>Prezzo</strong></Form.Label>
-          <Form.Control
-            type="number"
-            value={prezzo}
-            onChange={(e) => setPrezzo(e.target.value)}
-            required
-            min={0}
-            max={100000}
-          />
-        </Form.Group>
+        <Row>
+          <Col xs={12} sm={6} md={4}>
+            <Form.Group controlId="prezzo" className="mb-3">
+              <Form.Label><strong>Prezzo</strong></Form.Label>
+              <Form.Control
+                type="number"
+                value={prezzo}
+                onChange={(e) => setPrezzo(e.target.value)}
+                required
+                min={0}
+                max={100000}
+              />
+            </Form.Group>
+          </Col>
 
-        <Form.Group controlId="localita">
-          <Form.Label className="pt-2"><strong>Località</strong></Form.Label>
-          <Form.Control
-            type="text"
-            value={localita}
-            onChange={(e) => setLocalita(e.target.value)}
-            required
-            maxLength={100}
-          />
-        </Form.Group>
+          <Col xs={12} sm={6} md={4}>
+            <Form.Group controlId="localita" className="mb-3">
+              <Form.Label><strong>Località</strong></Form.Label>
+              <Form.Control
+                type="text"
+                value={localita}
+                onChange={(e) => setLocalita(e.target.value)}
+                required
+                maxLength={100}
+              />
+            </Form.Group>
+          </Col>
 
-        <Form.Group controlId="categoriaId">
-          <Form.Label className="pt-2"><strong>Categoria</strong></Form.Label>
-          <Form.Control
-            as="select"
-            value={categoriaId}
-            onChange={(e) => setCategoriaId(Number(e.target.value))}
-          >
-            <option value={1}>Villa</option>
-            <option value={2}>Appartamento</option>
-          </Form.Control>
-        </Form.Group>
+          <Col xs={12} md={4}>
+            <Form.Group controlId="categoriaId" className="mb-3">
+              <Form.Label><strong>Categoria</strong></Form.Label>
+              <Form.Control
+                as="select"
+                value={categoriaId}
+                onChange={(e) => setCategoriaId(Number(e.target.value))}
+              >
+                <option value={1}>Villa</option>
+                <option value={2}>Appartamento</option>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+        </Row>
 
-        <Form.Group controlId="descrizione">
-          <Form.Label className="pt-2"><strong>Descrizione</strong></Form.Label>
+        <Form.Group controlId="descrizione" className="mb-4">
+          <Form.Label><strong>Descrizione</strong></Form.Label>
           <Form.Control
             as="textarea"
             rows={5}
@@ -144,7 +156,7 @@ const AddVillaComp = () => {
           />
         </Form.Group>
 
-        <div className="d-flex justify-content-between mt-5">
+        <div className="d-flex justify-content-between mt-4">
           <Button variant="transparent" className="btnVedi" onClick={handleBack}>
             Torna Indietro
           </Button>

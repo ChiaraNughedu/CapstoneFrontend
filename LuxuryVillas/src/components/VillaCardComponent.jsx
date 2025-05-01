@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 
 const VillaCardComponent = ({ id, nomeVilla, localita, imgCopertina, onDelete }) => {
   const navigate = useNavigate();
-  const token = useSelector((state) => state.auth.token);
+  //const token = useSelector((state) => state.auth.token);
   const ruolo = useSelector((state) => state.auth.ruolo);
 
-  const isAuthenticated = !!token;
+  //const isAuthenticated = !!token;
   const isAdmin = ruolo === "Admin";
 
   return (

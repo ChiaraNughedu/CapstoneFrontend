@@ -44,7 +44,7 @@ function NavbarComponent() {
         </Col>
         <Col xs={6} className="text-end">
           <Nav.Link className="pb-0" as={Link} to="/blog">Blog</Nav.Link>
-          <Nav.Link className="pb-0" as={Link} to="/login">Login</Nav.Link>
+          <Nav.Link className="pb-0" onClick={handleLoginClick}>Login</Nav.Link>
           <Nav.Link className="pb-0" as={Link} to="/prenotazioni">Prenotazioni</Nav.Link>
         </Col>
       </Row>
@@ -55,7 +55,7 @@ function NavbarComponent() {
       <Nav.Link as={Link} to="/ville">Ville</Nav.Link>
       <Nav.Link as={Link} to="/chi-siamo">Chi Siamo</Nav.Link>
       <Nav.Link as={Link} to="/blog">Blog</Nav.Link>
-      <Nav.Link as={Link} to="/login">Login</Nav.Link>
+      <Nav.Link onClick={handleLoginClick}>Login</Nav.Link>
       <Nav.Link as={Link} to="/prenotazioni">Prenotazioni</Nav.Link>
     </div>
   </Nav>
