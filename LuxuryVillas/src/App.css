@@ -77,13 +77,24 @@ body {
   text-align: center;
   margin-top: 18vh;
   letter-spacing: 2.7px;
-  
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeSlideIn 1s ease-out forwards;
 }
+@keyframes fadeSlideIn {
+  to {
+    opacity: 2;
+    transform: translateY(0);
+  }
+}
+
+
 .lead {
   font-size: 1.5em;
   color: #faf6ee;
   padding-top: 0;
   letter-spacing: 1.2px;
+  
 }
 .homeH5 {
   font-family: "Bilbo Swash Caps", cursive;
@@ -341,9 +352,6 @@ body {
 }
 
 /*PRENOTAZIONI*/
-
-
-
 
 /*FOOTER*/
 .footer {

@@ -30,12 +30,13 @@ function App() {
       <NavbarComponent />
       <Routes>
         <Route path="/" element={<HomeComponent />} />
-        <Route path="/login" element={<LoginComponent />} />
-        <Route path="/logout" element={<LogoutComp />} />
-        <Route path="/ville" element={<VilleComponent />} />
-        <Route path="/Ville/:id" element={<DetailsComponent />} />
         <Route path="/user/dashboard" element={<UserDashboard />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/login" element={<LoginComponent />} />
+        <Route path="/logout" element={<LogoutComp />} />
+        <Route path="/ville" element={<VilleComponent />} />     
+        <Route path="/admin/aggiungi-villa" element={<AddVillaComp />} />
+        <Route path="/Ville/:id" element={<DetailsComponent />} />
         <Route path="/admin/modifica-villa/:id" element={<EditVillaComp />} />
         <Route path="/chi-siamo" element={<AboutUsComp />} />
         <Route path="/prenotazioni" element={<PrenotazioniComp />} />
@@ -44,7 +45,7 @@ function App() {
         <Route path="/blog" element={<BlogComponent />} />
         <Route path="/blog/:id" element={<BlogDetailComp />} />
         <Route path="/blog/modifica/:id" element={<EditBlogComp />} />
-        <Route path="/admin/aggiungi-villa" element={<AddVillaComp />} />
+   
       </Routes>
     </BrowserRouter>
     
