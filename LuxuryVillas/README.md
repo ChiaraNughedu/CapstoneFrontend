@@ -1,5 +1,7 @@
 # 👑 Boutique Villas - Luxury Villas Management
 
+Status: In Development
+
 Boutique Villas è un'applicazione full-stack progettata per gestire e promuovere ville di lusso situate nella splendida Costa Smeralda. L'applicazione, oltre ad offrire diverse funzionalità per utenti e amministratori, consente all'utente non solo di accedere al servizio di booking diretto delle ville, ma anche di acquisire maggiori informazioni sul territorio su cui si trovano le ville, garantendo una scelta più consapevole per quanto riguarda le località di vacanza. Essendo un'applicazione rivolta ad un determinato target di clienti, ho scelto un'interfaccia semplice, elegante ed intuituva per la mia applicazione, in modo che il focus rimanesse comunque sul prodotto Ville di Lusso nonostante le informazioni e le funzionalità correlate. Lato Admin invece l'applicazione consente la piena gestione del sito, dalle prenotazioni ai prodotti, fino alla gestione degli articoli della sezione Blog.
 
 ## 🎇 Funzionalità Principali
@@ -37,14 +39,14 @@ Boutique Villas è un'applicazione full-stack progettata per gestire e promuover
   - ESLint: Linter per mantenere un codice pulito e coerente.
 
 - **Backend**:
-- **Linguaggio**: C# 12.0
-- **Framework**: .NET 8
-- **Database**: SQL Server (Entity Framework Core)
-- **Autenticazione**: JWT (JSON Web Token)
-- **Identity**: ASP.NET Core Identity per la gestione di utenti e ruoli.
-- **Swagger**: Per la documentazione dell'API.
-- **Dependency Injection**: Per la gestione dei servizi.
-- **CORS**: Configurazione per consentire richieste da frontend esterni.
+- Linguaggio: C# 12.0
+- Framework: .NET 8
+- Database: SQL Server (Entity Framework Core)
+- Autenticazione: JWT (JSON Web Token)
+- Identity: ASP.NET Core Identity per la gestione di utenti e ruoli.
+- Swagger: Per la documentazione dell'API.
+- Dependency Injection: Per la gestione dei servizi.
+- CORS: Configurazione per consentire richieste da frontend esterni.
 
 
 
@@ -54,7 +56,7 @@ Boutique Villas è un'applicazione full-stack progettata per gestire e promuover
 
 ### Modello per appsettings.json
 
-{
+- {
     "Logging": {
         "LogLevel": {
             "Default": "Information",
@@ -70,7 +72,7 @@ Boutique Villas è un'applicazione full-stack progettata per gestire e promuover
         "Key": "t8RgS@9vC!aBz3kLpQmXcTz4wHnE$1GdP2rLuVy!KdXsMnTqFbGhZu",
         "Issuer": "luxuryvilla.api"
     }
-}
+ } 
 
 
 
